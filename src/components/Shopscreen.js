@@ -22,8 +22,8 @@ const Shopscreen = () => {
     
     localStorage.setItem('egofit-cart', JSON.stringify(existingCart));
     
-    // Optional: Navigate to cart or show notification
-    navigate('/cart');
+    // Show success notification (optional: add toast notification here)
+    alert('Item added to cart!');
   };
 
   // Product data organized by categories
