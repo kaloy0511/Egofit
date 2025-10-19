@@ -246,38 +246,38 @@ const Cartscreen = () => {
 
       {/* Thank You Modal */}
       {showThankYouModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 text-center">
-            <div className="mb-6">
-              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <div className="modal-content">
+              <div className="modal-icon-container">
+                <svg className="modal-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You for Your Order!</h2>
-              <p className="text-gray-600 mb-6">
+              <h2 className="modal-title">Thank You for Your Order!</h2>
+              <p className="modal-description">
                 Your order has been successfully placed. We appreciate your business and hope you enjoy your EGOFIT products!
               </p>
-              <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                <p className="text-sm text-gray-700">
+              <div className="modal-order-summary">
+                <p className="modal-order-text">
                   <strong>Order Summary:</strong><br />
                   {calculateItemCount()} item(s) • Total: ₱{(calculateTotal() + 100).toFixed(2)}
                 </p>
               </div>
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="modal-buttons">
               <button
                 onClick={() => {
                   setShowThankYouModal(false);
                   clearCart();
                 }}
-                className="w-full bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium"
+                className="modal-primary-button"
               >
                 Continue Shopping
               </button>
               <button
                 onClick={() => setShowThankYouModal(false)}
-                className="w-full bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium"
+                className="modal-secondary-button"
               >
                 Close
               </button>
