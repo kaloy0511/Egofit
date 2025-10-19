@@ -4,8 +4,8 @@ import '../styles/Cartscreen.css';
 
 const Cartscreen = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
-  // Load cart items from localStorage on component mount
   useEffect(() => {
     const savedCart = localStorage.getItem('egofit-cart');
     if (savedCart) {
@@ -13,7 +13,6 @@ const Cartscreen = () => {
     }
   }, []);
 
-  // Update localStorage whenever cart changes
   useEffect(() => {
     localStorage.setItem('egofit-cart', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -47,6 +46,10 @@ const Cartscreen = () => {
 
   const calculateItemCount = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const handleProceedToCheckout = () => {
+    setShowThankYouModal(true);
   };
 
   return (
@@ -174,7 +177,10 @@ const Cartscreen = () => {
                       <span className="text-lg font-semibold text-gray-900">₱{(calculateTotal() + 100).toFixed(2)}</span>
                     </div>
                   </div>
-                  <button className="w-full bg-black text-white py-3 px-6 rounded-none hover:bg-gray-800 transition-colors duration-200 uppercase font-medium tracking-wider mb-3">
+                  <button 
+                    onClick={handleProceedToCheckout}
+                    className="w-full bg-black text-white py-3 px-6 rounded-none hover:bg-gray-800 transition-colors duration-200 uppercase font-medium tracking-wider mb-3"
+                  >
                     Proceed to Checkout
                   </button>
                   <button 
@@ -237,6 +243,48 @@ const Cartscreen = () => {
           </div>
         </div>
       </footer>
+
+      {/* Thank You Modal */}
+      {showThankYouModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 text-center">
+            <div className="mb-6">
+              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You for Your Order!</h2>
+              <p className="text-gray-600 mb-6">
+                Your order has been successfully placed. We appreciate your business and hope you enjoy your EGOFIT products!
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                <p className="text-sm text-gray-700">
+                  <strong>Order Summary:</strong><br />
+                  {calculateItemCount()} item(s) • Total: ₱{(calculateTotal() + 100).toFixed(2)}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  setShowThankYouModal(false);
+                  clearCart();
+                }}
+                className="w-full bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium"
+              >
+                Continue Shopping
+              </button>
+              <button
+                onClick={() => setShowThankYouModal(false)}
+                className="w-full bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -6,27 +6,21 @@ const Shopscreen = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Add to cart function
+
   const addToCart = (product) => {
     const existingCart = JSON.parse(localStorage.getItem('egofit-cart') || '[]');
     
     const existingItemIndex = existingCart.findIndex(item => item.id === product.id);
     
     if (existingItemIndex >= 0) {
-      // If item exists, increase quantity
       existingCart[existingItemIndex].quantity += 1;
     } else {
-      // If new item, add with quantity 1
       existingCart.push({ ...product, quantity: 1 });
     }
     
     localStorage.setItem('egofit-cart', JSON.stringify(existingCart));
-    
-    // Show success notification (optional: add toast notification here)
     alert('Item added to cart!');
   };
-
-  // Product data organized by categories
   const allProducts = [
     // Men's Products
     {
