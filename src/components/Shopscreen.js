@@ -156,7 +156,7 @@ const Shopscreen = () => {
       <header className="sticky top-0 z-50 bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Mobile Back Button */}
+            {/* Mobile Back Button - Navigate to Home */}
             <button 
               onClick={() => navigate('/')}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200 mr-3"
