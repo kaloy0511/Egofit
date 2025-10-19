@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomescreenTailwind from './components/HomescreenTailwind';
+import Shopscreen from './components/Shopscreen';
+import Cartscreen from './components/Cartscreen';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomescreenTailwind />} />
+          <Route path="/shop" element={<Shopscreen />} />
+          <Route path="/cart" element={<Cartscreen />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
